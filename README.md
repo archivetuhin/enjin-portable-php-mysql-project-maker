@@ -1,15 +1,14 @@
-# <p align="center">Enjin</p>
-<p align="center"><img src="https://i.postimg.cc/4dhtMG8V/Chat-GPT-Image-Jan-13-2026-09-16-07-AM.png" alt="Enjin Logo" width="120"></p>
+# Enjin
 
-<p align="center">
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](https://opensource.org/licenses/MIT)  
-  [![Platform: Windows](https://img.shields.io/badge/Platform-Windows-blue)]  
-  [![PHP Versions](https://img.shields.io/badge/PHP-7.4%7C8.0%7C8.1-lightgrey)]  
-  [![MySQL Versions](https://img.shields.io/badge/MySQL-5.7%7C8.0-blue)]  
-  [![Frameworks](https://img.shields.io/badge/Frameworks-Laravel%2CCodeIgniter-green)]  
-</p>
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow)
+![Platform: Windows](https://img.shields.io/badge/Platform-Windows-blue)
+![PHP Versions](https://img.shields.io/badge/PHP-7.4-8.1-lightgrey)
+![MySQL Versions](https://img.shields.io/badge/MySQL-5.7-8.0-blue)
+![Frameworks](https://img.shields.io/badge/Frameworks-Laravel_CodeIgniter-green)
 
 ---
+
+<p align="center"><img src="https://i.postimg.cc/4dhtMG8V/Chat-GPT-Image-Jan-13-2026-09-16-07-AM.png" alt="Enjin Logo" width="120"></p>
 
 ## 📖 Table of Contents
 1. [About](#about)
