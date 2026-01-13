@@ -2,11 +2,11 @@
 <p align="center"><img src="https://i.postimg.cc/4dhtMG8V/Chat-GPT-Image-Jan-13-2026-09-16-07-AM.png" alt="Enjin Logo" width="120"></p>
 
 <p align="center">
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
-[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-blue.svg)]
-[![PHP Versions](https://img.shields.io/badge/PHP-7.4%7C8.0%7C8.1-lightgrey.svg)]
-[![MySQL](https://img.shields.io/badge/MySQL-5.7%7C8.0-blue.svg)]
-[![Frameworks](https://img.shields.io/badge/Frameworks-Laravel%2CCodeIgniter-green.svg)]
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](https://opensource.org/licenses/MIT)  
+  [![Platform: Windows](https://img.shields.io/badge/Platform-Windows-blue)]  
+  [![PHP Versions](https://img.shields.io/badge/PHP-7.4%7C8.0%7C8.1-lightgrey)]  
+  [![MySQL Versions](https://img.shields.io/badge/MySQL-5.7%7C8.0-blue)]  
+  [![Frameworks](https://img.shields.io/badge/Frameworks-Laravel%2CCodeIgniter-green)]  
 </p>
 
 ---
