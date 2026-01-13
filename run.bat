@@ -169,6 +169,68 @@ REM 3. SET ENVIRONMENT VARIABLES
 set "PATH=%PHP_DIR%;%PHP_DIR%ext;%PATH%"
 set "PHPRC=%PHP_DIR%"
 
+REM ==== RUN COMPOSER (Optional) ====
+
+if exist "%SERVER_ROOT%tools\composer.phar" (
+    echo.
+    set /p "RUN_COMPOSER=Run Composer for this project? Enter Y or N: "
+    
+    set "RUN_COMPOSER=!RUN_COMPOSER:~0,1!"
+
+    echo You selected: !RUN_COMPOSER!
+
+    if /i "!RUN_COMPOSER!"=="Y" (
+        echo.
+        echo [INFO] Target Directory set to: "%TARGET_DIR%"
+        
+        :: CRITICAL FIX: Create the directory if it does not exist
+        if not exist "%TARGET_DIR%" (
+            echo [INFO] Directory does not exist. Creating it now...
+            mkdir "%TARGET_DIR%"
+        )
+
+        echo ----------------------------------------
+        
+        if exist "%TARGET_DIR%\composer.json" (
+            echo [INFO] composer.json found. Running composer install...
+            "%PHP_EXE%" "%SERVER_ROOT%tools\composer.phar" install --working-dir="%TARGET_DIR%"
+        ) else (
+            echo [INFO] composer.json not found. Running composer init...
+            
+            :: Run composer init
+            "%PHP_EXE%" "%SERVER_ROOT%tools\composer.phar" init --name="enjin/test-project" --require="" --no-interaction --working-dir="%TARGET_DIR%"
+            
+            :: Verify that init actually worked before running install
+            if exist "%TARGET_DIR%\composer.json" (
+                echo [SUCCESS] composer.json created.
+                echo [INFO] Running composer install after init...
+                "%PHP_EXE%" "%SERVER_ROOT%tools\composer.phar" install --working-dir="%TARGET_DIR%"
+            ) else (
+                echo.
+                echo [ERROR] FAILED: Composer init could not create composer.json.
+                echo Please check that you have write permissions for "%TARGET_DIR%"
+            )
+        )
+
+        echo ----------------------------------------
+        if errorlevel 1 (
+            echo.
+            echo [WARNING] Composer encountered an error!
+        ) else (
+            echo.
+            echo [SUCCESS] Composer process completed.
+        )
+    ) else (
+        echo.
+        echo [INFO] Skipping Composer install.
+    )
+) else (
+    echo [INFO] Composer.phar not found in tools folder. Skipping.
+)
+
+echo.
+ cls
+
 REM ==== STEP 6: CLEAR SCREEN & DRAW COLORED SIGNATURE ====
 echo.
 powershell -NoProfile -Command "Write-Host ' _____  _   _      _ ____   _   _ ' -ForegroundColor Cyan; Write-Host '| ____|| \ | |    | ||_ _| | \ | |' -ForegroundColor Cyan; Write-Host '|  _|  |  \| | _  | | | |  |  \| |' -ForegroundColor Cyan; Write-Host '| |___ | |\  || |_| | | |  | |\  |' -ForegroundColor Cyan; Write-Host '|_____||_| \_| \___/ |___| |_| \_|' -ForegroundColor Cyan"
