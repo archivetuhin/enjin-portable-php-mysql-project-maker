@@ -1,225 +1,159 @@
-# Enjin - Portable Multi-PHP & MySQL Development Environment for Windows
-![Project Banner](assets/banner.png)
 
 
+Here is the complete `README.md` content. You can **copy the code block below**, save it as a file named `README.md`, and place it in the root of your GitHub repository (or GitHub Pages branch).
 
-## Overview
+```markdown
+# Enjin <img src="https://i.postimg.cc/4dhtMG8V/Chat-GPT-Image-Jan-13-2026-09-16-07-AM.png" alt="Enjin Logo" width="80">
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Windows](https://img.shields.io/badge/Platform-Windows-blue.svg)](https://www.microsoft.com/windows)
 
 **Enjin** is a portable, lightweight, and versatile Windows development environment for PHP developers. It allows you to run multiple **PHP versions** simultaneously and manage multiple projects with ease. With built-in support for **portable MySQL and MariaDB**, Enjin ensures a clean, isolated workflow without requiring system-wide installation of PHP or databases.
 
-Enjin is perfect for:
-
-- Testing and running projects across different PHP versions (PHP 7.4, 8.0, 8.1, etc.)
-- Managing legacy and modern PHP applications side by side
-- Portable development on USB drives or external disks
-- Avoiding conflicts with globally installed PHP or database stacks
-
-**Keywords**: portable PHP server, multiple PHP versions, portable MySQL, Windows PHP development, Enjin portable server, PHP project environment
+Perfect for testing legacy and modern PHP applications side-by-side on a USB drive or external disk.
 
 ---
 
-## Folder Structure
+## 📺 Demo Video
 
-Enjin uses a simple and predictable folder layout for portability and SEO-friendly documentation clarity:
+Watch how Enjin works:
 
-```
-G:\portable_server\
+[![Enjin Demo](https://img.youtube.com/vi/iyH5ek-Asv4/0.jpg)](https://www.youtube.com/watch?v=iyH5ek-Asv4)
+
+*Watch the full tutorial on [YouTube](https://www.youtube.com/watch?v=iyH5ek-Asv4).*
+
+---
+
+## ✨ Features
+
+- 🚀 **Fully Portable:** Run Enjin from a USB stick or cloud folder. No installation required.
+- 🔢 **Multi-PHP Support:** Easily switch between PHP 7.4, 8.0, 8.1, etc., for different projects.
+- ⚙️ **Interactive Runner:** The `run.bat` script guides you through selecting a folder and PHP version.
+- 💾 **Portable Database Support:** Pre-configured for portable MySQL/MariaDB without installing services.
+- 🛠️ **Clean Structure:** Manual project control. Create folders in `root` and run servers instantly.
+
+---
+
+## 📁 Folder Structure
+
+Enjin uses a simple and predictable folder layout for portability:
+
+```text
+G:\enjin\
 │
 ├─ php\
 │  ├─ php81\
 │  │  ├─ php.exe
 │  │  └─ ext\
 │  ├─ php82\
-│  └─ ...
+│  └─ ... (Add more versions here)
 │
-├─ root\            (project folders created here)
+├─ root\            (Create your project folders here)
+│  ├─ my_app\
+│  └─ index.php
 │
-├─ database\        (portable MySQL/MariaDB folders per version)
+├─ database\        (Portable MySQL/MariaDB folders)
 │  ├─ mysql57\
 │  ├─ mysql80\
 │  └─ ...
-├─ create_project.bat
-└─ config.ini
+│
+├─ run.bat        (Interactive Server Runner)
+└─ config.ini     (Configuration file)
 ```
-
-**Keywords**: portable PHP directory structure, Enjin folder structure, PHP and MySQL setup, Windows development folder
 
 ---
 
-## Requirements
+## 🚀 Quick Start
 
-- Windows 10 or newer
-- Portable PHP builds in `php` folder
-- Portable MySQL or MariaDB (optional for database support)
-- Write permission to the portable server directory
+### 1. Download & Extract
+Download the latest release and extract it to your desired location (e.g., `G:\enjin\`).
+
+### 2. Create Project Folder
+Navigate to the `root` folder manually and create a new folder for your project (e.g., `my_project`). Add your PHP files (like `index.php`) into this folder.
+
+### 3. Run the Script
+Go back to the main directory (`G:\enjin\`) and double-click **`run.bat`**.
+
+### 4. Interact
+The script will guide you:
+1. **Enter Project Folder Name:** (Type the folder you created in `root`).
+2. **Select PHP Version:** Choose from the list of detected versions.
+3. **(Optional) Custom Domain/Port:** Set specific host/port if needed.
+
+The server will start automatically!
 
 ---
 
-## Configuration File (`config.ini`)
+## ⚙️ Configuration
 
-Example `config.ini`:
+You can edit `config.ini` to set global defaults. This file is read by `run.bat`.
 
-```
-SERVER_ROOT=G:\portable_server\
-SERVER_DOC_ROOT=G:\portable_server\root
+```ini
+SERVER_ROOT=G:\enjin\
+SERVER_DOC_ROOT=G:\enjin\root\
 DEFAULT_HOST=localhost
 DEFAULT_PORT=8000
 ```
 
-**SEO keywords**: Enjin config, portable PHP config, PHP project config, config.ini setup
+---
+
+## 🔧 Advanced Configuration
+
+### Adding a New PHP Version
+1.  Download the **Thread Safe** Zip version for Windows from [php.net](https://windows.php.net/download/).
+2.  Extract it into the `php` folder (e.g., `G:\enjin\php\php83\`).
+3.  Copy `php.ini-development` to `php.ini` and configure extensions if needed.
+4.  Restart `run.bat` to see the new version in the list.
+
+### Installing Portable MySQL
+1.  Download the **ZIP** (not MSI Installer) portable MySQL/MariaDB.
+2.  Extract to the `database` folder (e.g., `G:\enjin\database\mysql81\`).
+3.  Create a `data` folder inside the extracted directory.
+4.  Run PowerShell as Administrator and initialize the database:
+    ```bash
+    mysqld --initialize-insecure --datadir="G:\enjin\database\mysql81\data"
+    ```
+5.  Start the server manually using `mysqld.exe` inside the `bin` folder.
 
 ---
 
-## How Enjin Works
+## 💰 Sponsorship & Donations
 
-Enjin allows manual project management and PHP version selection for maximum control:
+If Enjin helps you develop faster or manage your projects more effectively, please consider supporting its development.
 
-- Choose your PHP version per project
-- Assign a unique port for each project
-- Start servers manually for isolated environments
-
-**Keywords**: run multiple PHP versions, Enjin PHP workflow, PHP version management, manual project setup
+[![Donate](https://img.shields.io/badge/Donate-PayPal-gold.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=tuhiny2k5@gmail.com&item_name=Enjin+Donation)
+*Donate via PayPal: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=tuhiny2k5@gmail.com&item_name=Enjin+Donation*
 
 ---
 
-## Creating a New Project (Manual Workflow)
+## 👨‍💻 Hire Me
 
-1. Create a new folder inside the document root.
-2. Add your PHP files (e.g., `index.php`).
-3. Choose the PHP version to run.
-4. Start the PHP built-in server manually using the selected PHP executable.
+I am the creator of Enjin and I am available for freelance projects. 
 
-Each project can run independently on different PHP versions and ports.
+**My Tech Stack:**
+- **Backend:** PHP, MySQL, Laravel, CodeIgniter
+- **Frontend:** Vue.js, React.js, AngularJS
+- **Domains:** HRM Systems, CRM Solutions, E-commerce platforms
 
-**Keywords**: PHP project setup, Enjin project workflow, portable PHP server, multiple PHP projects
-
----
-
-## MySQL / MariaDB Installation and Setup (Portable)
-
-Step-by-step guide to install and run portable MySQL or MariaDB for Enjin:
-
-### Step 1: Download
-
-- Download the ZIP or portable version from the official MariaDB or MySQL site (avoid installers).
-
-### Step 2: Extract
-
-- Extract each version into its own folder:
-
-```
-G:\portable_server\mysql\mysql57\
-G:\portable_server\mysql\mysql80\
-```
-
-### Step 3: Create Data Directory
-
-```
-G:\portable_server\mysql\mysql57\data
-G:\portable_server\mysql\mysql80\data
-```
-
-### Step 4: Initialize Database
-
-- Open **Windows PowerShell** as Administrator.
-- Navigate to the `bin` folder of the database version:
-
-```
-cd G:\portable_server\mysql\mysql57\bin
-```
-
-- Initialize database using full path:
-
-```
-.\"G:\portable_server\mysql\mysql57\bin\mysqld.exe" --initialize-insecure --datadir="G:\portable_server\mysql\mysql57\data"
-```
-
-### Step 5: Start Database Server
-
-- Start server manually:
-
-```
-.\"G:\portable_server\mysql\mysql57\bin\mysqld.exe" --datadir="G:\portable_server\mysql\mysql57\data"
-```
-
-- Optional: create `start_db.bat` for convenience.
-
-### Step 6: Connect PHP Projects
-
-```php
-$host = '127.0.0.1';
-$port = 3306;
-$username = 'root';
-$password = '';
-$dbname = 'my_project_db';
-```
-
-**Keywords**: portable MySQL setup, Enjin MySQL, MariaDB setup Windows, PHP database connection, PHP MySQL tutorial
+Feel free to contact me for custom web development or configuration services.
 
 ---
 
-## Generated Files
+## 📞 Support & Contact
 
-### index.php
+Need help or have a suggestion?
 
+- 🐛 **Issues:** [Report a bug or request a feature on GitHub](https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker/issues)
+- 📧 **Email:** [tuhiny2k5@gmail.com](mailto:tuhiny2k5@gmail.com)
+- 💬 **WhatsApp:** [+8801837742506](https://wa.me/8801837742506)
+
+---
+
+## 📜 License
+
+This project is provided as-is for local development and learning purposes. It is open source under the **MIT License**. You are free to modify and redistribute it within your own projects.
+
+---
+
+**Created with ❤️ by [archivetuhin](https://github.com/archivetuhin)**
 ```
-<?php
-echo "Project is running";
-?>
-```
-
-### run.bat
-
-- Sets the correct PHP directory
-- Loads extensions from the selected PHP version
-- Starts PHP using `php -S`
-
-**Keywords**: PHP development server, run PHP project, Enjin index.php, run.bat instructions
-
----
-
-## Support and Donations
-
-### Paid Support
-
-Professional support available for:
-
-- Enjin setup and customization
-- Multi-PHP project workflows
-- Portable MySQL / MariaDB configuration
-- Troubleshooting environments
-
-## Demo Video
--- 
-[Watch the video on YouTube](https://www.youtube.com/watch?v=iyH5ek-Asv4)
-
-Contact:
-- Email: archivetuhin@gmail.com
-- WhatsApp: +8801837742506
-
-### Donations
-
-- PayPal: https://paypal.me/myappclours
-
-**Keywords**: Enjin support, Enjin donations, professional PHP help, portable PHP support
-
----
-
-## Best Practices
-
-- Keep PHP versions clearly named (php81, php82, etc.)
-- Keep database versions clearly named (mysql57, mysql80, etc.)
-- Do not move project folders after creation
-- Run everything from the portable server directory
-- Use separate database instances per project if needed
-
-**Keywords**: PHP best practices, database best practices, Enjin tips, portable server guidelines
-
----
-
-## License
-
-This script is provided as-is for local development and learning purposes. You are free to modify and redistribute it within your own projects.
-
-**Keywords**: Enjin license, portable PHP license, open source PHP server
-
