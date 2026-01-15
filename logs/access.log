@@ -1,0 +1,5 @@
+127.0.0.1 - - [15/Jan/2026:20:25:56 +0600] "GET / HTTP/1.1" 502 559 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+127.0.0.1 - - [15/Jan/2026:20:27:08 +0600] "GET / HTTP/1.1" 502 559 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+127.0.0.1 - - [15/Jan/2026:20:32:13 +0600] "GET / HTTP/1.1" 200 89615 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+127.0.0.1 - - [15/Jan/2026:20:36:07 +0600] "GET / HTTP/1.1" 200 88956 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+127.0.0.1 - - [15/Jan/2026:20:36:08 +0600] "GET /favicon.ico HTTP/1.1" 200 88731 "https://test.local/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
