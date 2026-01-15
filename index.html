@@ -3,177 +3,451 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enjin - Portable Multi-PHP & MySQL Environment</title>
-    <meta name="description" content="A portable, lightweight, and versatile Windows development environment for PHP developers.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SEO Meta Tags -->
+    <title>Enjin - Portable PHP & MySQL Development Environment for Windows</title>
+    <meta name="description" content="Enjin is a fully portable Windows development environment for PHP developers. Run multiple PHP versions (7.4-8.3), manage projects, enable SSL, and use nginx with PHP FastCGI without installation.">
+    <meta name="keywords" content="Portable PHP, Windows Server, Localhost, PHP Development, Nginx Portable, Laravel Local Environment, CodeIgniter Server, MySQL Portable, PHP FastCGI">
+    <meta name="author" content="archivetuhin">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker">
+
+    <!-- Social Media / Open Graph Meta Tags -->
+    <meta property="og:title" content="Enjin - Portable PHP & MySQL Development Environment">
+    <meta property="og:description" content="Run PHP, Nginx, and MySQL from your USB drive. No installation required. Perfect for Laravel and CodeIgniter developers.">
+    <meta property="og:image" content="https://i.postimg.cc/4dhtMG8V/Chat-GPT-Image-Jan-13-2026-09-16-07-AM.png">
+    <meta property="og:url" content="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Enjin">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Enjin - Portable PHP Environment">
+    <meta name="twitter:description" content="The ultimate portable server stack for Windows developers.">
+    <meta name="twitter:image" content="https://i.postimg.cc/4dhtMG8V/Chat-GPT-Image-Jan-13-2026-09-16-07-AM.png">
+
+    <!-- Fonts & Icons -->
     <style>
-        /* --- CSS Variables --- */
         :root {
-            --bg-body: #0f172a;
-            --bg-surface: #1e293b;
-            --bg-surface-hover: #334155;
-            --bg-surface-2: #0f172a;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #38bdf8; /* Sky blue */
-            --primary-glow: rgba(56, 189, 248, 0.2);
-            --accent: #818cf8; /* Indigo */
-            --donate-gold: #fbbf24; /* PayPal/Coffee Gold */
-            --donate-bg: rgba(251, 191, 36, 0.1);
+            /* Color Palette - Light Theme */
+            --bg-body: #ffffff;
+            --bg-card: #f8fafc;
+            --bg-card-hover: #f1f5f9;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --accent: #8b5cf6;
             --success: #10b981;
-            --wa-green: #25D366; /* WhatsApp Green */
-            --folder-color: #eab308;
-            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'Fira Code', 'Courier New', monospace;
-            --container-width: 1100px;
-            --radius-md: 12px;
-            --radius-sm: 6px;
+            --code-bg: #1e293b;
+            --border: #e2e8f0;
+            
+            /* Spacing & Layout */
+            --container-width: 1200px;
+            --header-height: 70px;
+            --radius: 8px;
         }
 
-        /* --- Reset & Base --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: var(--font-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.2s; }
-        ul, ol { list-style: none; }
-
-        /* --- Typography --- */
-        h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; line-height: 1.2; }
-        .text-gradient {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
         }
-        
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utility Classes */
         .container {
             max-width: var(--container-width);
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
         }
 
-        /* --- Buttons --- */
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 28px;
-            border-radius: var(--radius-sm);
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: var(--radius);
             font-weight: 600;
             cursor: pointer;
-            font-size: 1rem;
+            transition: all 0.2s ease;
             border: none;
+            font-size: 0.95rem;
+            gap: 8px;
+            white-space: nowrap;
         }
 
         .btn-primary {
-            background: var(--primary);
-            color: #0f172a;
-            box-shadow: 0 0 20px var(--primary-glow);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px var(--primary-glow); }
 
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--text-muted);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
             color: var(--text-main);
         }
-        .btn-outline:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
 
-        .btn-donate {
-            background: var(--donate-gold);
-            color: #000;
+        .btn-secondary:hover {
+            background-color: var(--bg-card-hover);
+            border-color: var(--text-muted);
         }
-        .btn-donate:hover {
-            background: #f59e0b;
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
-        }
-
+        
         .btn-hire {
-            background: var(--accent);
+            background-color: #25D366; /* WhatsApp Green */
             color: white;
         }
-        .btn-hire:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(129, 140, 248, 0.4); }
-
-        /* --- Header --- */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding: 16px 0;
-            z-index: 1000;
-        }
-
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-        .logo span { color: var(--primary); }
         
-        /* Logo Image Styling */
-        .logo img {
-            height: 32px;
-            width: auto;
-            border-radius: 4px;
+        .btn-hire:hover {
+            background-color: #20b857;
+        }
+        
+        .btn-hire.large {
+            padding: 15px 30px;
+            font-size: 1.1rem;
         }
 
-        .nav-links { display: flex; gap: 24px; }
-        .nav-links a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
-        .nav-links a:hover { color: var(--primary); }
+        .btn-donate {
+            background-color: #ffc439; /* PayPal Gold */
+            color: #000000;
+        }
 
-        /* --- Hero Section --- */
+        .btn-donate:hover {
+            background-color: #eab308;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Navigation - BLACK */
+        header.navbar {
+            height: var(--header-height);
+            position: fixed; /* FIXED as requested */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000000;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
         .hero {
-            padding-top: 180px;
-            padding-bottom: 60px; /* Reduced padding since video follows */
+            padding: 160px 0 100px;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 50%;
+            top: -20%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(15, 23, 42, 0) 70%);
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, rgba(255, 255, 255, 0) 70%);
             z-index: -1;
-            pointer-events: none;
         }
 
-        .hero h1 { font-size: 3.8rem; margin-bottom: 24px; }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
-        .hero-actions { display: flex; justify-content: center; gap: 20px; margin-bottom: 40px; }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--text-main);
+        }
 
-        /* --- Video Demo Section (NEW) --- */
-        .demo-video {
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .hero-badges img {
+            height: 26px;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Tech Stack Banner */
+        .tech-stack-banner {
+            background-color: var(--bg-card);
             padding: 40px 0;
-            background: var(--bg-body);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tech-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Comparison Section (Pros & Cons) */
+        .comparison-section {
+            padding: 100px 0;
+            background-color: var(--bg-card);
         }
         
-        .video-wrapper {
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .compare-col h3 {
+            margin-bottom: 20px;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+        
+        .compare-col.enjin h3 { color: var(--primary); border-color: var(--primary); }
+        .compare-col.others h3 { color: var(--text-muted); }
+        
+        .compare-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
             position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            background: #000;
-            border-radius: var(--radius-md);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            overflow: hidden;
+        }
+        
+        .compare-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+        
+        .enjin .compare-list li::before {
+            content: '✔';
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .others .compare-list li::before {
+            content: '✖';
+            color: #ef4444;
+            font-weight: bold;
         }
 
-        .video-wrapper iframe {
+        /* FAQ Section */
+        .faq-section {
+            padding: 100px 0;
+        }
+        
+        .faq-item {
+            background: #fff;
+            border: 1px solid var(--border);
+            margin-bottom: 15px;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            background: var(--bg-card);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            display: none; /* JS will toggle */
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Folder Structure Section */
+        .structure-section {
+            padding: 100px 0;
+            background-color: #f1f5f9;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            border: 1px solid #334155;
+            border-radius: var(--radius);
+            padding: 20px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .tree-line {
+            display: block;
+            margin-bottom: 4px;
+        }
+        .tree-dir { color: #60a5fa; font-weight: bold; }
+        .tree-file { color: #94a3b8; }
+
+        /* Demo Section */
+        .demo-section {
+            padding: 100px 0;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -181,719 +455,1044 @@
             height: 100%;
         }
 
-        /* --- Server Dashboard Visual --- */
-        .server-dashboard {
-            background: var(--bg-surface);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: var(--radius-md);
-            padding: 30px;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        /* User Guide Section */
+        .user-guide-section {
+            padding: 100px 0;
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
-        .status-badge {
-            display: inline-flex;
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .step-content {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            flex-grow: 1;
+        }
+
+        .step-content h4 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        .step-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        /* CMD Window Style */
+        .prompt-box {
+            background-color: #0c0c0c;
+            color: #cccccc;
+            font-family: 'Consolas', 'Courier New', monospace;
+            border-radius: 6px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .cmd-header {
+            background-color: #e0e0e0;
+            padding: 8px 12px;
+            display: flex;
             gap: 8px;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
-            padding: 4px 12px;
-            border-radius: 100px;
+            align-items: center;
+        }
+
+        .cmd-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .dot-red { background-color: #ff5f56; }
+        .dot-yellow { background-color: #ffbd2e; }
+        .dot-green { background-color: #27c93f; }
+
+        .cmd-title {
+            margin-left: 10px;
+            color: #333;
+            font-family: 'Segoe UI', sans-serif;
             font-size: 0.85rem;
             font-weight: 600;
         }
-        .status-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; animation: pulse 2s infinite; }
 
-        .terminal-log {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            background: #0b1120;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: left;
-            overflow-x: auto;
-            line-height: 1.2; /* tighter line height for art */
-        }
-
-        .log-line { display: block; margin-bottom: 4px; }
-        .log-info { color: #94a3b8; }
-        .log-success { color: var(--success); }
-        .log-highlight { color: var(--primary); }
-        .ascii-art { color: var(--primary); display: block; margin: 10px 0; white-space: pre; font-weight: bold; font-size: 0.85rem; line-height: 1.1; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-        /* --- Features Grid --- */
-        .features { padding: 100px 0; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 2.5rem; margin-bottom: 12px; }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--bg-surface);
-            padding: 30px;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-        }
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--primary);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .card h3 { font-size: 1.25rem; margin-bottom: 10px; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; }
-
-        /* --- Folder Structure Visual --- */
-        .folder-structure {
-            background: #000;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: var(--font-mono);
-            color: #e2e8f0;
-            margin: 40px 0;
-            text-align: left;
-            overflow-x: auto;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .folder-line { padding: 4px 0; }
-        .folder-icon { color: var(--folder-color); margin-right: 8px; }
-        .indent-1 { padding-left: 20px; }
-        .indent-2 { padding-left: 40px; }
-
-        /* --- Usage Steps --- */
-        .usage { padding: 100px 0; }
-        .step-list { max-width: 800px; margin: 0 auto; }
-        .step {
-            display: flex;
-            gap: 24px;
-            margin-bottom: 50px;
-            align-items: flex-start;
-        }
-        .step-num {
-            width: 50px;
-            height: 50px;
-            background: var(--bg-surface);
-            color: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-            border: 2px solid rgba(255,255,255,0.1);
-        }
-        .step-content h3 { margin-bottom: 12px; color: var(--text-main); font-size: 1.4rem; }
-        .step-content p { color: var(--text-muted); margin-bottom: 16px; }
-        .step-highlight {
-            background: rgba(56, 189, 248, 0.1);
-            border-left: 3px solid var(--primary);
+        .cmd-body {
             padding: 15px;
-            border-radius: 4px;
-            color: #e2e8f0;
-            font-size: 0.95rem;
-        }
-        .code-snippet {
-            background: #000;
-            padding: 12px 16px;
-            border-radius: 6px;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--text-main);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 10px 0;
+            text-align: left; /* Explicitly left aligned */
+            white-space: pre-wrap; /* Respects line breaks in HTML */
+            line-height: 1.4;
         }
 
-        /* --- Advanced Configuration Section --- */
-        .advanced-config {
-            padding: 100px 0;
-            background: #162032;
+        .blink-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.1em;
+            background-color: #cccccc;
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
         }
-        .config-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-        @media (max-width: 768px) { .config-grid { grid-template-columns: 1fr; } }
 
-        .config-card {
-            background: var(--bg-surface);
-            padding: 30px;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(255,255,255,0.05);
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
-        .config-card h3 { color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        
-        .config-steps ol {
-            padding-left: 20px;
-            color: var(--text-muted);
-        }
-        .config-steps li {
-            margin-bottom: 15px;
-            position: relative;
-            padding-left: 10px;
-        }
-        .config-steps li::before {
-            content: counter(list-item) ".";
-            position: absolute;
-            left: -20px;
-            color: var(--accent);
+
+        .success-message {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.5rem;
             font-weight: bold;
-        }
-        .config-steps code {
-            background: rgba(0,0,0,0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #e2e8f0;
-            font-family: var(--font-mono);
-            font-size: 0.85em;
+            color: var(--primary);
+            background: #eff6ff;
+            padding: 20px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        /* --- Support & Feedback --- */
-        .support-feedback { padding: 80px 0; border-top: 1px solid rgba(255,255,255,0.05); }
-        .sf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        @media (max-width: 768px) { .sf-grid { grid-template-columns: 1fr; } }
+        /* Sponsorship Section */
+        .sponsor-section {
+            padding: 80px 0;
+            text-align: center;
+            background-color: #ffffff;
+        }
 
-        .sf-card {
-            background: var(--bg-surface);
+        .sponsor-box {
+            background-color: #f8fafc;
+            border: 1px dashed var(--border);
             padding: 40px;
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Hire Me Section (Redesigned) */
+        .hire-section {
+            padding: 100px 0;
+            background-color: #f8fafc;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hire-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr; /* Skills take more space */
+            gap: 50px;
+            align-items: start;
+        }
+
+        .hire-skills h3, .hire-projects h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            color: var(--text-main);
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        .skill-category-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            margin-top: 25px;
+            font-weight: 700;
+        }
+
+        .skill-list {
+            display: grid;
+            grid-template-columns: 1fr; /* One column */
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: #ffffff;
+            padding: 15px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .skill-item i {
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        /* Skill Color Coding */
+        .skill-item.premium {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .skill-item.wordpress {
+            border-left: 4px solid #21759b; /* WP Blue */
+            color: #21759b;
+        }
+
+        .skill-item.woocommerce {
+            border-left: 4px solid #96588a; /* Woo Purple */
+            color: #96588a;
+        }
+        
+        .skill-item.api {
+            border-left: 4px solid var(--success);
+            color: var(--success);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .skill-divider {
+            border-top: 1px dashed var(--border);
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .hire-projects {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .project-item {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: transform 0.2s;
+            font-weight: 500;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
+            gap: 10px;
         }
-        .sf-card h3 { margin: 20px 0 10px; font-size: 1.5rem; }
-        .sf-card p { margin-bottom: 30px; color: var(--text-muted); }
-        
-        .sf-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        .project-item i {
             font-size: 1.5rem;
+            color: var(--accent);
         }
 
-        /* --- Donation Section --- */
-        .donation-banner {
-            background: linear-gradient(to right, rgba(251, 191, 36, 0.05), rgba(251, 191, 36, 0.02));
-            border: 1px solid var(--donate-gold);
-            border-radius: var(--radius-md);
-            padding: 50px;
-            margin: 80px auto;
-            max-width: var(--container-width);
+        .project-item:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .hire-cta {
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            margin-top: 40px;
+            padding: 20px;
+            background: #e0f2fe;
+            border-radius: var(--radius);
         }
-        .donation-banner h2 { color: var(--donate-gold); margin-bottom: 15px; }
-        .donation-banner p { color: var(--text-muted); max-width: 500px; margin: 0 auto 30px; }
 
-        /* --- FAQ Section --- */
-        .faq-section { padding: 80px 0; background: var(--bg-surface); }
-        .faq-item {
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .faq-question {
-            width: 100%;
-            text-align: left;
-            background: none;
-            border: none;
-            color: var(--text-main);
-            font-size: 1.1rem;
-            font-weight: 600;
-            padding: 20px 0;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .faq-question:hover { color: var(--primary); }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            color: var(--text-muted);
-        }
-        .faq-answer p { padding-bottom: 20px; }
-        .faq-toggle { transition: transform 0.3s ease; }
-        .faq-item.active .faq-toggle { transform: rotate(180deg); }
-        .faq-item.active .faq-answer { max-height: 200px; }
-
-        /* --- Freelance Section --- */
-        .freelance-section {
-            padding: 100px 0;
-            background: linear-gradient(180deg, var(--bg-body) 0%, rgba(129, 140, 248, 0.05) 100%);
-            text-align: center;
-        }
-        .tech-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin: 30px 0;
-        }
-        .tech-tag {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 0.9rem;
-            color: var(--text-main);
-            font-weight: 500;
-        }
-        .tech-tag.backend { border-color: var(--primary); color: var(--primary); }
-        .tech-tag.frontend { border-color: var(--accent); color: var(--accent); }
-        .tech-tag.domain { border-color: var(--success); color: var(--success); }
-
-        /* --- Footer --- */
+        /* Footer */
         footer {
-            border-top: 1px solid rgba(255,255,255,0.05);
+            background-color: #000000;
             padding: 60px 0 30px;
-            text-align: center;
-            color: var(--text-muted);
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #94a3b8;
         }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .footer-links a:hover { color: var(--primary); }
 
-        /* --- Floating WhatsApp Button --- */
-        .float-wa {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 30px;
-            right: 30px;
-            background-color: var(--wa-green);
-            color: #FFF;
-            border-radius: 50px;
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #cbd5e1;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
             text-align: center;
-            font-size: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 2000;
+            color: #64748b;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+        
+        .footer-bottom a {
+            color: var(--primary);
+        }
+        
+        /* Floating WhatsApp */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s;
         }
-
-        .float-wa:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.6);
+        
+        .floating-whatsapp:hover {
+            transform: scale(1.05);
         }
-
-        .float-wa svg {
-            width: 32px;
-            height: 32px;
+        
+        .floating-whatsapp svg {
+            width: 24px;
+            height: 24px;
             fill: white;
         }
 
-        /* --- Responsive --- */
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hire-grid { grid-template-columns: 1fr; gap: 40px; }
+            .skill-list { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
-            .tech-diagram { flex-direction: column; gap: 20px; }
-            .tech-arrow { transform: rotate(90deg); }
-            .server-dashboard { margin: 0 10px; }
-            .donation-banner { padding: 30px 20px; }
-            .float-wa {
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
+            .nav-links { display: none; } /* Hide standard links on mobile initially */
+            .mobile-menu-btn { display: block; }
+            .hero-actions { flex-direction: column; }
+            .video-container { height: auto; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            
+            /* Mobile menu state */
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background-color: #000000;
+                padding: 20px;
+                border-bottom: 1px solid #333;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <!-- Updated Logo Image -->
-                    <img src="https://i.postimg.cc/4dhtMG8V/Chat-GPT-Image-Jan-13-2026-09-16-07-AM.png" alt="Enjin Logo">
-                    <span>Enjin</span>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#usage">Usage</a></li>
-                    <li><a href="#advanced">Advanced</a></li>
-                    <li><a href="#support">Support</a></li>
-                    <li><a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker" target="_blank">GitHub</a></li>
-                </ul>
-                <div style="display: md-none;">
-                    <a href="#hire-me" class="btn btn-hire" style="padding: 8px 16px; font-size: 0.9rem;">Hire Me</a>
-                </div>
+    <!-- Navigation (Fixed Top Bar) -->
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a href="#" class="logo">
+                <span>ENJIN</span>
+            </a>
+            
+            <!-- Mobile Toggle -->
+            <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+            
+            <nav class="nav-links">
+                <!-- Buttons placed in requested order: Download -> Hire Me -> Donate -->
+                <a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker" target="_blank" class="btn btn-primary">Download</a>
+                <a href="https://wa.me/8801837742506" target="_blank" class="btn btn-hire">Hire Me</a>
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=tuhiny2k5@gmail.com&item_name=Enjin+Donation" target="_blank" class="btn btn-donate">Donate</a>
             </nav>
         </div>
     </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <h1>Portable Multi-PHP<br><span class="text-gradient">Development Environment</span></h1>
-                <p>
-                    A lightweight, versatile Windows environment. Run multiple PHP versions simultaneously and manage MySQL without installation.
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/8801837742506" target="_blank" class="floating-whatsapp" title="Contact on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        Contact
+    </a>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badges">
+                <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License">
+                <img src="https://img.shields.io/badge/Platform-Windows-blue" alt="Windows Platform">
+                <img src="https://img.shields.io/badge/PHP-7.4-8.3-lightgrey" alt="PHP Versions">
+                <img src="https://img.shields.io/badge/Composer-Supported-orange" alt="Composer Support">
+            </div>
+            
+            <h1>Portable PHP Development<br>Environment for Windows</h1>
+            <p>
+                Run multiple PHP versions, manage projects, enable SSL, and use Nginx with PHP FastCGI—all without installing anything system-wide. Perfect for Laravel, CodeIgniter, and more.
+            </p>
+            
+            <div class="hero-actions">
+                <a href="#guide" class="btn btn-primary">Get Started</a>
+                <a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker" target="_blank" class="btn btn-secondary">View on GitHub</a>
+            </div>
+
+            <div style="margin-top: 50px;">
+                <p class="section-subtitle" style="margin-bottom: 20px;">Powered by modern technologies</p>
+                <div class="tech-grid">
+                    <img src="https://img.shields.io/badge/PHP-7.4-777BB4?logo=php&logoColor=white" alt="PHP">
+                    <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white" alt="MySQL">
+                    <img src="https://img.shields.io/badge/Laravel-Red?logo=laravel&logoColor=white" alt="Laravel">
+                    <img src="https://img.shields.io/badge/CodeIgniter-Orange?logo=codeigniter&logoColor=white" alt="CodeIgniter">
+                    <img src="https://img.shields.io/badge/Nginx-Green?logo=nginx&logoColor=white" alt="Nginx">
+                    <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white" alt="HTML">
+                    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Enjin?</h2>
+            <p class="section-subtitle">Designed for developers who need flexibility and portability.</p>
+
+            <div class="feature-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                    </div>
+                    <h3>Fully Portable</h3>
+                    <p>Run your entire development stack from a USB drive or any folder. Zero installation, zero registry changes on your Windows OS.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                    </div>
+                    <h3>Multi-PHP Support</h3>
+                    <p>Switch instantly between PHP 7.4, 8.0, 8.1, and 8.3. Test your code across different runtime environments effortlessly.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h3>SSL & Nginx</h3>
+                    <p>Integrated OpenSSL and Nginx configuration. Serve your projects over HTTPS locally with a single click.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 0 1-7.94l-6.91 6.91a2.12 2.12 0 0 0 1-3-3l6.91-6.91a6 6 0 0 0 1 7.94l-3.76 3.76z"/></svg>
+                    </div>
+                    <h3>Framework Ready</h3>
+                    <p>Preconfigured environments specifically optimized for Laravel, CodeIgniter, and generic PHP applications.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3-3V5"/></svg>
+                    </div>
+                    <h3>Portable Databases</h3>
+                    <p>Includes MySQL/MariaDB support (5.7, 8.0, 9.0) without installing Windows services. Your data stays with your project.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3>FastCGI PHP</h3>
+                    <p>High performance execution using PHP-FPM compatible FastCGI process management through Nginx.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Comparison Section -->
+    <section id="comparison" class="comparison-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Enjin?</h2>
+            <p class="section-subtitle">See how Enjin stacks up against other popular environments.</p>
+            
+            <div class="comparison-grid">
+                <div class="compare-col enjin">
+                    <h3>Enjin</h3>
+                    <ul class="compare-list">
+                        <li>Completely Portable (USB/Cloud)</li>
+                        <li>No Windows Registry Changes</li>
+                        <li>Run Multiple PHP Versions Simultaneously</li>
+                        <li>Lightweight & Fast Startup</li>
+                        <li>Built-in SSL & Nginx Configurator</li>
+                        <li>Easy Composer Integration</li>
+                        <li>Works offline after download</li>
+                    </ul>
+                </div>
+                
+                <div class="compare-col others">
+                    <h3>XAMPP / WAMP / Docker</h3>
+                    <ul class="compare-list">
+                        <li>Requires System Installation</li>
+                        <li>Clutters Windows Registry</li>
+                        <li>Difficult to switch PHP versions instantly</li>
+                        <li>Heavy resource usage (especially Docker)</li>
+                        <li>Manual SSL configuration is complex</li>
+                        <li>Steep learning curve for Docker</li>
+                        <li>Requires Internet for Docker images</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    </section>
+
+    <!-- Folder Structure Section -->
+    <section id="structure" class="structure-section">
+        <div class="container">
+            <h2 class="section-title">Folder Structure</h2>
+            <p class="section-subtitle">Clean, organized, and logical. Keep your workspace tidy.</p>
+            
+            <div class="code-block">
+                <span class="tree-line"><span class="tree-dir">G:\enjin\</span></span>
+                <span class="tree-line">│</span>
+                <span class="tree-line">├─ <span class="tree-dir">assets\</span>           (Optional project assets)</span>
+                <span class="tree-line">├─ <span class="tree-dir">lib\</span></span>
+                <span class="tree-line">│  ├─ <span class="tree-dir">php\</span>           (PHP versions: php74, php80, etc.)</span>
+                <span class="tree-line">│  ├─ <span class="tree-dir">mysql\</span>         (MySQL versions: mysql57, mysql80, mysql90)</span>
+                <span class="tree-line">│  ├─ <span class="tree-dir">scripts\</span>       (Batch scripts: run_server.bat, nginx.bat, etc.)</span>
+                <span class="tree-line">│  └─ <span class="tree-dir">tools\</span>         (Composer, OpenSSL, Nginx binaries)</span>
+                <span class="tree-line">│</span>
+                <span class="tree-line">├─ <span class="tree-dir">root\</span>             (Your PHP projects)</span>
+                <span class="tree-line">│  └─ <span class="tree-dir">my_project\</span></span>
+                <span class="tree-line">├─ <span class="tree-dir">logs\</span>             (Server logs)</span>
+                <span class="tree-line">├─ <span class="tree-dir">temp\</span>             (Temporary files, cache)</span>
+                <span class="tree-line">├─ <span class="tree-file">run.bat</span>           (Interactive Server Runner)</span>
+                <span class="tree-line">└─ <span class="tree-file">README.md</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2 class="section-title">Watch Demo</h2>
+            <p class="section-subtitle">See how easy it is to set up a local server in minutes.</p>
+            
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/iyH5ek-Asv4" title="Enjin Demo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Guide Section -->
+    <section id="guide" class="user-guide-section">
+        <div class="container">
+            <h2 class="section-title">User Guide</h2>
+            <p class="section-subtitle">Follow these steps to set up your portable environment.</p>
+
+            <div class="steps">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Download & Setup</h4>
+                        <p>Download from Git or clone repository. If you downloaded ZIP file, unzip it and move to folder to your preferred drive.</p>
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Launch Application</h4>
+                        <p>Locate project root folder and double-click on <code>run.bat</code>. The CMD window will open to guide you.</p>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Project Folder Name</h4>
+                        <p>The prompt will ask you for your project folder name. Enjin creates a dedicated <code>root</code> folder where all your PHP projects will be stored.</p>
+                        <div class="prompt-box">
+                            <div class="cmd-header">
+                                <div class="cmd-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+                                <span class="cmd-title">C:\Windows\System32\cmd.exe</span>
+                            </div>
+                            <div class="cmd-body">
+                                Microsoft Windows [Version 10.0.19045.3693]<br>
+                                (c) Microsoft Corporation. All rights reserved.<br><br>
+                                C:\Enjin> Please enter your project folder name: <span class="blink-cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Existing or New Project?</h4>
+                        <p>Choose to continue with existing folder or create a new project folder inside <code>root</code> directory.</p>
+                        <div class="prompt-box">
+                            <div class="cmd-header">
+                                <div class="cmd-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+                                <span class="cmd-title">C:\Windows\System32\cmd.exe</span>
+                            </div>
+                            <div class="cmd-body">
+                                C:\Enjin> Folder found. Continue with existing?<br>
+                                1. Yes<br>
+                                2. No <span class="blink-cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Local Domain Setup</h4>
+                        <p>If you want to use a local domain (e.g., enjin.local), Enjin will automatically create an entry in your Hosts file.</p>
+                        <div class="prompt-box">
+                            <div class="cmd-header">
+                                <div class="cmd-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+                                <span class="cmd-title">C:\Windows\System32\cmd.exe</span>
+                            </div>
+                            <div class="cmd-body">
+                                C:\Enjin> Use local domain?<br>
+                                1. Yes<br>
+                                2. No <span class="blink-cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Select PHP Version</h4>
+                        <p>Select PHP version required for your specific project.</p>
+                        <div class="prompt-box">
+                            <div class="cmd-header">
+                                <div class="cmd-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+                                <span class="cmd-title">C:\Windows\System32\cmd.exe</span>
+                            </div>
+                            <div class="cmd-body">
+                                Select PHP version (7.4, 8.0, 8.1, 8.3):<br>
+                                1. php7.4<br>
+                                2. php8.0<br>
+                                3. php8.1<br>
+                                4. php8.3<br>
+                                Enter Choice: <span class="blink-cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h4>Composer Integration</h4>
+                        <p>Select if you need Composer for dependency management.</p>
+                        <div class="prompt-box">
+                            <div class="cmd-header">
+                                <div class="cmd-dots"><div class="dot dot-red"></div><div class="dot-yellow"></div><div class="dot dot-green"></div></div>
+                                <span class="cmd-title">C:\Windows\System32\cmd.exe</span>
+                            </div>
+                            <div class="cmd-body">
+                                C:\Enjin> Do you need Composer for this project?<br>
+                                1. Yes<br>
+                                2. No <span class="blink-cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-item">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <h4>SSL Configuration</h4>
+                        <p>Decide if you need SSL. Enjin will configure certificates for HTTPS if you choose yes.</p>
+                        <div class="prompt-box">
+                            <div class="cmd-header">
+                                <div class="cmd-dots"><div class="dot dot-red"></div><div class="dot dot-yellow"></div><div class="dot dot-green"></div></div>
+                                <span class="cmd-title">C:\Windows\System32\cmd.exe</span>
+                            </div>
+                            <div class="cmd-body">
+                                C:\Enjin> Do you need SSL?<br>
+                                1. Yes<br>
+                                2. No <span class="blink-cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-message">
+                    <span>🚀</span> Happy Coding!
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker" target="_blank" class="btn btn-primary">Download from GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Install Section -->
+    <section id="install" class="structure-section">
+        <div class="container">
+            <h2 class="section-title">Manual Installation Guide</h2>
+            <p class="section-subtitle">How to manually install PHP or MySQL if you need specific versions not included by default.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                <!-- PHP Install -->
+                <div class="step-content" style="border-left: 4px solid var(--primary);">
+                    <h4>Installing Multiple PHP Versions</h4>
+                    <p>1. Download PHP Non-Thread Safe (NTS) zip archive for Windows from php.net.</p>
+                    <p>2. Extract contents to Enjin library folder:</p>
+                    <div class="code-block" style="margin: 10px 0;">
+                        <span class="tree-line">C:\enjin\lib\php\php81</span>
+                        <span class="tree-line">C:\enjin\lib\php\php84</span>
+                    </div>
+                    <p>3. Rename folder to match version (e.g., <code>php{version}</code>).</p>
+                    <p>4. Restart <code>run.bat</code>; new version will appear in selection menu.</p>
+                </div>
+
+                <!-- MySQL Install -->
+                <div class="step-content" style="border-left: 4px solid var(--accent);">
+                    <h4>Installing MySQL / MariaDB</h4>
+                    <p>1. Download MySQL or MariaDB zip archive (no installer) for Windows.</p>
+                    <p>2. Extract contents to Enjin library folder:</p>
+                    <div class="code-block" style="margin: 10px 0;">
+                        <span class="tree-line">C:\enjin\lib\mysql\mysql90</span>
+                        <span class="tree-line">C:\enjin\lib\mysql\mariadb11</span>
+                    </div>
+                    <p>3. Rename folder to <code>mysql{v-no}</code>.</p>
+                    <p>4. Enjin scripts will automatically detect <code>bin\mysqld.exe</code> inside these folders.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item active">
+                    <div class="faq-question" onclick="toggleFaq(this)">Is Enjin really free? <span>+</span></div>
+                    <div class="faq-answer">Yes, Enjin is completely free and open-source under MIT License. You can use it for personal and commercial projects.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Can I run multiple projects at once? <span>+</span></div>
+                    <div class="faq-answer">Currently, Enjin runs one instance of server at a time via interactive command line menu. However, you can easily switch between projects instantly using <code>run.bat</code> menu.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Does it require Administrator rights? <span>+</span></div>
+                    <div class="faq-answer">Generally no, since it is portable. However, if you choose to set up a local domain (editing Windows Hosts file), script may prompt you for Administrator privileges.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">Where is my project data stored? <span>+</span></div>
+                    <div class="faq-answer">All your project files are stored in <code>root\</code> folder inside Enjin directory. Database data is stored inside <code>lib\mysql\mysql{version}\data\</code>. Moving Enjin folder moves your data.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hire Me Section (Redesigned) -->
+    <section id="hire" class="hire-section">
+        <div class="container">
+            <h2 class="section-title">Hire Me</h2>
+            <p class="section-subtitle">Expert Full Stack PHP Developer delivering robust web solutions.</p>
+
+            <div class="hire-grid">
+                <!-- Skills Column -->
+                <div class="hire-skills">
+                    <h3>Technical Skills</h3>
+                    
+                    <div class="skill-list">
+                        <!-- Frameworks -->
+                        <div class="skill-item premium">
+                            <i class="fab fa-laravel"></i>
+                            <span>Laravel Development</span>
+                        </div>
+                        <div class="skill-item premium">
+                            <i class="fas fa-code"></i>
+                            <span>CodeIgniter</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-php"></i>
+                            <span>Raw PHP</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>MySQL / MariaDB</span>
+                        </div>
+
+                        <!-- CMS & Plugins -->
+                        <div class="skill-category-title">CMS & Plugins</div>
+
+                        <div class="skill-item wordpress">
+                            <i class="fab fa-wordpress"></i>
+                            <span>Wordpress Plugin Development</span>
+                        </div>
+                        <div class="skill-item woocommerce">
+                            <i class="fab fa-wordpress-simple"></i>
+                            <span>WooCommerce Plugin Development</span>
+                        </div>
+                        <div class="skill-item woocommerce">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Wordpress Plugin Customization</span>
+                        </div>
+                        <div class="skill-item woocommerce">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>WooCommerce Plugin Customization</span>
+                        </div>
+                        
+                        <!-- APIs & Others -->
+                        <div class="skill-category-title">Integrations & APIs</div>
+
+                        <div class="skill-item api">
+                            <i class="fas fa-plug"></i>
+                            <span>Payment Gateway Integration</span>
+                        </div>
+                        <div class="skill-item api">
+                            <i class="fas fa-network-wired"></i>
+                            <span>RestAPI Development</span>
+                        </div>
+                        <div class="skill-item api">
+                            <i class="fas fa-globe"></i>
+                            <span>Third Party API Integration</span>
+                        </div>
+                        <div class="skill-item api">
+                            <i class="fas fa-bug"></i>
+                            <span>Enhancement / Bug Solving</span>
+                        </div>
+                        <div class="skill-item api">
+                            <i class="fas fa-puzzle-piece"></i>
+                            <span>Module Development</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Column -->
+                <div class="hire-projects">
+                    <h3>Projects I Have Completed</h3>
+                    <div class="project-list">
+                        <div class="project-item">
+                            <i class="fas fa-file-invoice"></i>
+                            <span>Invoice System</span>
+                        </div>
+                        <div class="project-item">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>E-commerce Platform</span>
+                        </div>
+                        <div class="project-item">
+                            <i class="fas fa-users"></i>
+                            <span>HRM System</span>
+                        </div>
+                        <div class="project-item">
+                            <i class="fas fa-handshake"></i>
+                            <span>CRM System</span>
+                        </div>
+                        <div class="project-item">
+                            <i class="fas fa-boxes"></i>
+                            <span>Inventory Management</span>
+                        </div>
+                        <div class="project-item">
+                            <i class="fas fa-car"></i>
+                            <span>Car Booking Project</span>
+                        </div>
+                        <div class="project-item">
+                            <i class="fas fa-book"></i>
+                            <span>Stationary Management System</span>
+                        </div>
+                        <div class="project-item">
+                            <i class="fas fa-calculator"></i>
+                            <span>Accounting</span>
+                        </div>
+                        <div class="project-item">
+                            <i class="fas fa-cash-register"></i>
+                            <span>Point Of Sales (POS)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hire-cta">
+                <a href="https://wa.me/8801837742506" target="_blank" class="btn btn-hire large">
+                    <i class="fab fa-whatsapp"></i>
+                    Discuss Your Project
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsorship Section -->
+    <section class="sponsor-section">
+        <div class="container">
+            <div class="sponsor-box">
+                <h2 style="margin-bottom: 15px;">Support Enjin Development</h2>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">
+                    Enjin is free and open-source. If you find this tool useful for your development workflow, consider supporting project.
                 </p>
-                
-                <div class="hero-actions">
-                    <a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker/releases" target="_blank" class="btn btn-primary">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Download Enjin
-                    </a>
-                    <a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker" class="btn btn-outline">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        Source Code
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Demo Video Section (NEW) -->
-        <section class="demo-video">
-            <div class="container">
-                <div class="section-header" style="margin-bottom: 30px;">
-                    <h2>Demo Video</h2>
-                    <p style="color: var(--text-muted);">Watch the complete workflow in action.</p>
-                </div>
-                
-                <div class="video-wrapper">
-                    <!-- Embedding YouTube Video ID: iyH5ek-Asv4 -->
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/iyH5ek-Asv4" title="Enjin Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </div>
-        </section>
-
-        <!-- Server Dashboard Visual (Visual Showcase) -->
-        <section class="container" style="padding: 40px 0;">
-             <div class="server-dashboard">
-                <div class="dashboard-header">
-                    <h3 style="margin:0;">Enjin Runner (run.bat)</h3>
-                    <div class="status-badge">
-                        <div class="status-dot"></div> Ready
-                    </div>
-                </div>
-                <div class="terminal-log">
-                    <span class="log-line log-info">[INFO] Loading config...</span>
-                    <span class="log-line log-success">[SUCCESS] Found config.ini</span>
-                    <span class="log-line log-info">[SYSTEM] Checking for PHP versions...</span>
-                    <br>
-                    <span class="ascii-art">_____  _   _      _ ____   _   _
-| ____|| \ | |    | ||_ _| | \ | |
-|  _|  |  \| | _  | | | |  |  \| |
-| |___ | |\  || |_| | | |  | |\  |
-|_____||_| \_| \___/ |___| |_| \_|</span>
-                    <span class="log-line log-highlight">&gt; Enter Project Folder Name: my_app</span>
-                    <span class="log-line log-highlight">&gt; Available PHP versions:</span>
-                    <span class="log-line log-info">   1. php81</span>
-                    <span class="log-line log-info">   2. php82</span>
-                    <span class="log-line log-highlight">&gt; Select PHP number: 2</span>
-                    <span class="log-line log-success">[SERVER] Started at http://localhost:8000</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features -->
-        <section id="features" class="features">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Why Enjin?</h2>
-                    <p style="color: var(--text-muted);">Perfect for testing legacy and modern apps side-by-side.</p>
-                </div>
-
-                <div class="grid-3">
-                    <div class="card">
-                        <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                        </div>
-                        <h3>Fully Portable</h3>
-                        <p>Put Enjin on a USB stick or cloud folder. Your entire environment travels with you.</p>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/><polyline points="6 12 12 12 15 15"/></svg>
-                        </div>
-                        <h3>Multi-PHP Support</h3>
-                        <p>Run PHP 7.4, 8.0, and 8.1 simultaneously on different ports.</p>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                        </div>
-                        <h3>Clean Structure</h3>
-                        <p>Manual project control. Create folders in `root` and use to interactive runner.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Folder Structure -->
-        <section class="container" style="padding: 40px 0;">
-            <div class="section-header">
-                <h2>Folder Structure</h2>
-            </div>
-            <div class="folder-structure">
-                <div class="folder-line">G:\enjin\</div>
-                <div class="folder-line indent-1"><span class="folder-icon">├─</span> php\</div>
-                <div class="folder-line indent-2"><span class="folder-icon">│</span> ├─ php81\</div>
-                <div class="folder-line indent-2"><span class="folder-icon">│</span> ├─ php82\</div>
-                <div class="folder-line indent-2"><span class="folder-icon">│</span> └─ ...</div>
-                <div class="folder-line indent-1"><span class="folder-icon">├─</span> root\ <span style="color: var(--text-muted);"># (project folders created here)</span></div>
-                <div class="folder-line indent-1"><span class="folder-icon">├─</span> database\</div>
-                <div class="folder-line indent-2"><span class="folder-icon">│</span> ├─ mysql57\</div>
-                <div class="folder-line indent-2"><span class="folder-icon">│</span> ├─ mysql80\</div>
-                <div class="folder-line indent-1"><span class="folder-icon">├─</span> run.bat <span style="color: var(--text-muted);"># (Interactive Runner)</span></div>
-                <div class="folder-line indent-1"><span class="folder-icon">└─</span> config.ini</div>
-            </div>
-        </section>
-
-        <!-- Usage Steps -->
-        <section id="usage" class="usage">
-            <div class="container">
-                <div class="section-header">
-                    <h2>How to Use</h2>
-                    <p style="color: var(--text-muted);">Manual project creation followed by interactive execution.</p>
-                </div>
-
-                <div class="step-list">
-                    <div class="step">
-                        <div class="step-num">1</div>
-                        <div class="step-content">
-                            <h3>Create Project Folder Manually</h3>
-                            <p>Open to <code>G:\enjin\root\</code> folder. Create a new folder for your project (e.g., <code>my_app</code>). Add your PHP files (like <code>index.php</code>) inside it.</p>
-                            <div class="code-snippet">
-                                <span>G:\enjin\root\my_app\index.php</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-num">2</div>
-                        <div class="step-content">
-                            <h3>Run to Interactive Script</h3>
-                            <p>Go back to main <code>G:\enjin\</code> folder and double-click <strong>run.bat</strong>.</p>
-                            
-                            <div class="step-highlight">
-                                <strong>The script will ask for to folder name you just created.</strong><br>
-                                It will then ask you to select a PHP version and optionally a custom port.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-num">3</div>
-                        <div class="step-content">
-                            <h3>Server Starts Automatically</h3>
-                            <p>Once you select your options, Enjin configures to environment and starts to PHP server for you automatically.</p>
-                            <div class="code-snippet">
-                                <span>http://localhost:8000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Advanced Configuration -->
-        <section id="advanced" class="advanced-config">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Configuration & Setup</h2>
-                    <p style="color: var(--text-muted);">Edit these files to change defaults.</p>
-                </div>
-
-                <div class="config-grid">
-                    <!-- Config File -->
-                    <div class="config-card">
-                        <h3>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                            config.ini
-                        </h3>
-                        <div class="config-steps">
-                            <p style="color: var(--text-muted); margin-bottom: 15px;">Edit this file to set your server paths. <code>run.bat</code> reads these settings automatically.</p>
-                            <code style="display:block; padding:10px; background:rgba(0,0,0,0.3); border-radius:6px;">
-                                SERVER_ROOT=G:\enjin\<br>
-                                SERVER_DOC_ROOT=G:\enjin\root\<br>
-                                DEFAULT_HOST=localhost<br>
-                                DEFAULT_PORT=8000
-                            </code>
-                        </div>
-                    </div>
-
-                    <!-- MySQL Setup -->
-                    <div class="config-card">
-                        <h3>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-                            MySQL Setup
-                        </h3>
-                        <div class="config-steps">
-                            <ol>
-                                <li>Download ZIP portable MySQL.</li>
-                                <li>Extract to <code>G:\enjin\database\mysql80</code>.</li>
-                                <li>Create a <code>data</code> folder inside.</li>
-                                <li>Run PowerShell as Admin to initialize:</li>
-                                <div class="code-snippet" style="margin: 5px 0 15px;">
-                                    <span>mysqld --initialize-insecure --datadir=...</span>
-                                </div>
-                                <li>Start server manually.</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Support & Feedback -->
-        <section id="support" class="support-feedback">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Support & Community</h2>
-                    <p style="color: var(--text-muted);">We are here to help you build.</p>
-                </div>
-
-                <div class="sf-grid">
-                    <!-- Service Support Card -->
-                    <div class="sf-card">
-                        <div class="sf-icon" style="color: var(--primary);">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                        </div>
-                        <h3>Service Support</h3>
-                        <p>Need help setting up Enjin? Contact for Enjin setup, Multi-PHP workflows, or database configuration.</p>
-                        <a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker/issues" target="_blank" class="btn btn-outline">Get Help</a>
-                    </div>
-
-                    <!-- Feedback Card -->
-                    <div class="sf-card">
-                        <div class="sf-icon" style="color: var(--donate-gold);">
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                        </div>
-                        <h3>Feedback</h3>
-                        <p>Have suggestions to improve folder structure or workflow? Let us know.</p>
-                        <a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker/issues" target="_blank" class="btn btn-outline">Give Feedback</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Donation Section -->
-        <section id="donate" class="container">
-            <div class="donation-banner">
-                <svg style="margin-bottom: 20px; color: var(--donate-gold);" width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                
-                <h2>Support to Project</h2>
-                <p>If Enjin helps you develop faster, consider supporting its development.</p>
-                
-                <!-- PayPal Button with Email Link -->
-                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=tuhiny2k5@gmail.com&item_name=Enjin+Donation" target="_blank" class="btn btn-donate">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 6.823Z"/></svg>
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=tuhiny2k5@gmail.com&item_name=Enjin+Donation" target="_blank" class="btn btn-primary" style="background-color: #ffc439; color: #000;">
                     Donate via PayPal
                 </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Freelance / Work With Me Section -->
-        <section id="hire-me" class="freelance-section">
-            <div class="container">
-                <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Available for Freelance</h2>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
-                    I am creator of Enjin and I am currently open to new projects. 
-                    Whether you need a custom CRM, E-commerce platform, or a dynamic web application, I can help.
-                </p>
-
-                <div class="tech-grid">
-                    <!-- Backend -->
-                    <span class="tech-tag backend">PHP</span>
-                    <span class="tech-tag backend">MySQL</span>
-                    <span class="tech-tag backend">Laravel</span>
-                    <span class="tech-tag backend">CodeIgniter</span>
-                    
-                    <!-- Frontend -->
-                    <span class="tech-tag frontend">Vue.js</span>
-                    <span class="tech-tag frontend">React.js</span>
-                    <span class="tech-tag frontend">AngularJS</span>
-                    
-                    <!-- Domains -->
-                    <span class="tech-tag domain">HRM Systems</span>
-                    <span class="tech-tag domain">CRM Solutions</span>
-                    <span class="tech-tag domain">Ecommerce</span>
-                </div>
-
-                <div style="margin-top: 30px;">
-                    <a href="mailto:tuhiny2k5@gmail.com" class="btn btn-hire">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        Hire Me Now
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 20px;">
+                        <span>ENJIN</span>
                     </a>
+                    <p style="color: #94a3b8;">The ultimate portable Windows development environment for PHP developers.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#structure">Documentation</a></li>
+                        <li><a href="#guide">User Guide</a></li>
+                        <li><a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker" target="_blank">GitHub Repository</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker/issues" target="_blank">Report Issue</a></li>
+                        <li><a href="mailto:archivetuhin@gmail.com">archivetuhin@gmail.com</a></li>
+                        <li><a href="https://wa.me/8801837742506" target="_blank">WhatsApp: +8801837742506</a></li>
+                    </ul>
                 </div>
             </div>
-        </section>
 
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="footer-links">
-                    <a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker">GitHub Repository</a>
-                    <a href="https://github.com/archivetuhin/enjin-portable-php-mysql-project-maker/releases">Download</a>
-                    <a href="#advanced">Config</a>
-                    <a href="#support">Documentation</a>
-                    <a href="#donate">Donate</a>
-                    <a href="#hire-me">Freelance</a>
-                    <a href="#">License (MIT)</a>
-                </div>
-                <p>&copy; 2023 Enjin. Open Source MIT License.</p>
-                <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.6;">Created by archivetuhin</p>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Enjin. Released under <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>. Created with ❤️ by <a href="https://github.com/archivetuhin" target="_blank">archivetuhin</a>.</p>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-        <!-- Floating WhatsApp Button -->
-        <a href="https://wa.me/8801837742506" class="float-wa" target="_blank">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-        </a>
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
 
-    </main>
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    // Don't prevent default for buttons that don't have a hash
+                    if(!this.getAttribute('href')) return;
+                    
+                    e.preventDefault();
+                    navLinks.classList.remove('active'); // Close mobile menu on click
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+
+        // FAQ Toggle Logic
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const wasActive = item.classList.contains('active');
+            
+            // Close all others
+            document.querySelectorAll('.faq-item').forEach(i => {
+                i.classList.remove('active');
+            });
+
+            // Toggle current
+            if (!wasActive) {
+                item.classList.add('active');
+                element.querySelector('span').innerText = '-';
+            } else {
+                element.querySelector('span').innerText = '+';
+            }
+        }
+    </script>
 </body>
 </html>
