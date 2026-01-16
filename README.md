@@ -29,7 +29,11 @@
 ---
 
 ## 📖 About
-**Enjin** is a fully portable Windows development environment for PHP developers. Run multiple PHP versions, manage projects, enable SSL, and use nginx with PHP FastCGI—all without installing anything system-wide. Perfect for testing Laravel, CodeIgniter, and other frameworks locally, with MySQL/MariaDB support and Composer integration.
+**Enjin** is a portable Windows development environment designed for web developers who want a fast, lightweight, and self-contained solution. It includes PHP, MySQL, and Nginx, allowing you to run and test web projects locally without installing multiple tools or modifying system settings.
+
+With Enjin, you can create projects, manage servers, enable SSL, and switch PHP versions with a single command. It’s perfect for local web development, testing PHP applications, and experimenting with frameworks like Laravel or CodeIgniter on Windows.
+
+Built for portability and automation, Enjin simplifies your workflow by managing services, automating repetitive tasks, and providing a reliable local PHP stack that works anywhere. Whether you are a beginner learning web development or an experienced developer testing production-ready projects, Enjin delivers a fast and efficient Windows-based web development environment. 
 
 ---
 
