@@ -46,6 +46,11 @@
             --code-bg: #1e293b;
             --border: #e2e8f0;
             
+            /* Brand Colors for Tech Boxes */
+            --nginx-color: #009639;
+            --php-color: #777BB4;
+            --mysql-color: #00758F;
+            
             /* Spacing & Layout */
             --container-width: 1200px;
             --header-height: 70px;
@@ -164,7 +169,7 @@
         /* Navigation - BLACK */
         header.navbar {
             height: var(--header-height);
-            position: fixed; /* FIXED as requested */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -257,6 +262,156 @@
             justify-content: center;
             gap: 20px;
         }
+
+        /* -----------------------------------------------------------
+           NEW SECTION: About Enjin (Updated with Boxes)
+           ----------------------------------------------------------- */
+        .about-section {
+            padding: 100px 0;
+            background: #ffffff;
+            overflow: hidden;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: var(--text-main);
+        }
+
+        .about-content h2 span {
+            color: var(--primary);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .about-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        /* Tech Stack Visual Container */
+        .stack-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* The Connector Line */
+        .stack-connector {
+            width: 2px;
+            height: 30px;
+            background: var(--border);
+            position: relative;
+        }
+        
+        .stack-connector::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -4px;
+            width: 0; 
+            height: 0; 
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid var(--border);
+        }
+
+        /* Individual Tech Boxes */
+        .tech-box {
+            width: 260px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            border: 1px solid transparent;
+            cursor: default;
+        }
+
+        .tech-box:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .tech-box i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .tech-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .tech-box span {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Specific Box Styles */
+        .box-nginx {
+            border-top: 4px solid var(--nginx-color);
+            animation: float 6s ease-in-out infinite;
+        }
+        .box-nginx i { color: var(--nginx-color); }
+
+        .box-php {
+            border-top: 4px solid var(--php-color);
+            animation: float 6s ease-in-out 1s infinite; /* Delayed */
+        }
+        .box-php i { color: var(--php-color); }
+
+        .box-mysql {
+            border-top: 4px solid var(--mysql-color);
+            animation: float 6s ease-in-out 2s infinite; /* More Delayed */
+        }
+        .box-mysql i { color: var(--mysql-color); }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Responsive for About Section */
+        @media (max-width: 900px) {
+            .about-grid { 
+                grid-template-columns: 1fr; 
+                gap: 50px; 
+                text-align: center;
+            }
+            .about-content { order: 2; }
+            .about-visual { order: 1; }
+            .about-content p { text-align: left; }
+        }
+
+        /* ----------------------------------------------------------- */
 
         /* Tech Stack Banner */
         .tech-stack-banner {
@@ -906,6 +1061,58 @@
         </div>
     </section>
 
+    <!-- About Enjin Section (Updated with Tech Boxes) -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>About <span>Enjin</span></h2>
+                    <p>
+                        Enjin is a portable Windows development environment designed for web developers who want a fast, lightweight, and self-contained solution. It includes PHP, MySQL, and Nginx, allowing you to run and test web projects locally without installing multiple tools or modifying system settings.
+                    </p>
+                    <p>
+                        With Enjin, you can create projects, manage servers, enable SSL, and switch PHP versions with a single command. It’s perfect for local web development, testing PHP applications, and experimenting with frameworks like Laravel or CodeIgniter on Windows.
+                    </p>
+                    <p>
+                        Built for portability and automation, Enjin simplifies your workflow by managing services, automating repetitive tasks, and providing a reliable local PHP stack that works anywhere. Whether you are a beginner learning web development or an experienced developer testing production-ready projects, Enjin delivers a fast and efficient Windows-based web development environment.
+                    </p>
+                </div>
+                
+                <div class="about-visual">
+                    <!-- Tech Stack Visual: Connected Boxes -->
+                    <div class="stack-container">
+                        
+                        <!-- Nginx Box -->
+                        <div class="tech-box box-nginx">
+                            <i class="fas fa-server"></i>
+                            <h3>Nginx</h3>
+                            <span>Web Server</span>
+                        </div>
+                        
+                        <div class="stack-connector"></div>
+
+                        <!-- PHP Box -->
+                        <div class="tech-box box-php">
+                            <i class="fab fa-php"></i>
+                            <h3>PHP</h3>
+                            <span>Scripting Engine</span>
+                        </div>
+
+                        <div class="stack-connector"></div>
+
+                        <!-- MySQL Box -->
+                        <div class="tech-box box-mysql">
+                            <i class="fas fa-database"></i>
+                            <h3>MySQL</h3>
+                            <span>Database</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
@@ -1004,7 +1211,6 @@
                 </div>
             </div>
         </div>
-    </section>
     </section>
 
     <!-- Folder Structure Section -->
