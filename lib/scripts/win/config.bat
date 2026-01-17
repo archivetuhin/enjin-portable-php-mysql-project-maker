@@ -29,11 +29,11 @@ set "INST_DIR=!BASE!\instance\"
 REM --- PHP PATH ---
 set "PHP_PATH=!BASE!\lib\php\"
 
-set "PHP_INSTALL=!BASE!\lib\scripts\php.bat"
+set "PHP_INSTALL=!BASE!\lib\scripts\win\php.bat"
 
 REM --- MYSQL PATH ---
 set "MYSQL_PATH=!BASE!\lib\mysql\"
-set "MYSQL_INSTALL=!BASE!\lib\scripts\mysql.bat"
+set "MYSQL_INSTALL=!BASE!\lib\scripts\win\mysql.bat"
 
 REM --- COMPOSER PATH ---
 set "COMPOSER_PATH=!BASE!\lib\tools\composer\composer.phar"
@@ -57,13 +57,13 @@ set "SSL_PEM=!BASE!\lib\tools\openssl\ssl\certs\server.pem"
 
 REM --- SCRIPTS ---
 
-set "CREATE_PROJECT=!BASE!\lib\scripts\create-project.bat"
-set "SET_DOMAIN=!BASE!\lib\scripts\domain.bat"
-set "SET_PHP=!BASE!\lib\scripts\set_php.bat"
-set "SET_COMPOSER=!BASE!\lib\scripts\composer.bat"
-set "SET_NGINX=!BASE!\lib\scripts\nginx.bat"
-set "GET_SERVER=!BASE!\lib\scripts\run_server.bat"
-set "SSL_INSTALL=!BASE!\lib\scripts\ssl.bat"
+set "CREATE_PROJECT=!BASE!\lib\scripts\win\create-project.bat"
+set "SET_DOMAIN=!BASE!\lib\scripts\win\domain.bat"
+set "SET_PHP=!BASE!\lib\scripts\win\set_php.bat"
+set "SET_COMPOSER=!BASE!\lib\scripts\win\composer.bat"
+set "SET_NGINX=!BASE!\lib\scripts\win\nginx.bat"
+set "GET_SERVER=!BASE!\lib\scripts\win\run_server.bat"
+set "SSL_INSTALL=!BASE!\lib\scripts\win\ssl.bat"
 REM ==================================================
 REM 3. EXPORT VARIABLES TO PARENT SCRIPT
 REM We must use 'endlocal' to allow variables to survive,
@@ -76,10 +76,10 @@ endlocal & (
     set "INST_DIR=%BASE%\instance\"
     
     set "PHP_PATH=%BASE%\lib\php\"
-    set "PHP_INSTALL=%BASE%\lib\scripts\php.bat"
+    set "PHP_INSTALL=%BASE%\lib\scripts\win\php.bat"
 
     set "MYSQL_PATH=%BASE%\lib\mysql\"
-    set "MYSQL_INSTALL=%BASE%\lib\scripts\mysql.bat"
+    set "MYSQL_INSTALL=%BASE%\lib\scripts\win\mysql.bat"
 
     set "COMPOSER_PATH=%BASE%\lib\tools\composer\composer.phar"
 
@@ -92,16 +92,16 @@ endlocal & (
     set "OPENSSL_EXE_86=%BASE%\lib\tools\openssl\x86\bin\openssl.exe"
     set "OPENSSL_CONF=%BASE%\lib\tools\openssl\ssl\openssl.cnf"
 
-    set "SSL_INSTALL=%BASE%\lib\scripts\ssl.bat"
+    set "SSL_INSTALL=%BASE%\lib\scripts\win\ssl.bat"
     set "SSL_KEY=%BASE%\lib\tools\openssl\ssl\certs\server.key"
     set "SSL_CERT=%BASE%\lib\tools\openssl\ssl\certs\server.crt"
     set "SSL_PEM=%BASE%\lib\tools\openssl\ssl\certs\server.pem"
 
-    set "CREATE_PROJECT=%BASE%\lib\scripts\create-project.bat"
-    set "SET_DOMAIN=%BASE%\lib\scripts\domain.bat"
-    set "SET_PHP=%BASE%\lib\scripts\set_php.bat"
-    set "SET_COMPOSER=%BASE%\lib\scripts\composer.bat"
-    set "SET_NGINX=%BASE%\lib\scripts\nginx.bat"
-    set "GET_SERVER=%BASE%\lib\scripts\run_server.bat"
+    set "CREATE_PROJECT=%BASE%\lib\scripts\win\create-project.bat"
+    set "SET_DOMAIN=%BASE%\lib\scripts\win\domain.bat"
+    set "SET_PHP=%BASE%\lib\scripts\win\set_php.bat"
+    set "SET_COMPOSER=%BASE%\lib\scripts\win\composer.bat"
+    set "SET_NGINX=%BASE%\lib\scripts\win\nginx.bat"
+    set "GET_SERVER=%BASE%\lib\scripts\win\run_server.bat"
 )
 exit /b
