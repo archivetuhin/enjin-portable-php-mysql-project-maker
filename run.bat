@@ -10,7 +10,7 @@ if "%~1"=="" (
 if "!BASE:~-1!"=="\" set "BASE=!BASE:~0,-1!"
 
 REM 2. Load config
-set "CONFIG_FILE=%BASE%\lib\scripts\config.bat"
+set "CONFIG_FILE=%BASE%\lib\scripts\win\config.bat"
 
 call "%CONFIG_FILE%" "%BASE%"
 
