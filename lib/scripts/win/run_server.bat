@@ -1,6 +1,6 @@
 @echo off
 setlocal EnableDelayedExpansion
-
+cls
 REM ---- Header ----
 powershell -NoProfile -Command "Write-Host ' _____  _   _      _ ____   _   _ ' -ForegroundColor Cyan; Write-Host '| ____|| \ | |    | ||_ _| | \ | |' -ForegroundColor Cyan; Write-Host '|  _|  |  \| | _  | | | |  |  \| |' -ForegroundColor Cyan; Write-Host '| |___ | |\  || |_| | | |  | |\  |' -ForegroundColor Cyan; Write-Host '|_____||_| \_| \___/ |___| |_| \_|' -ForegroundColor Cyan"
 
@@ -11,7 +11,7 @@ echo =================================================
 echo  Folder: %TARGET_DIR%
 echo  PHP:    !PHP_NAMES[%PHP_CHOICE%]!
 if "%USE_SSL%" == "Y" (
-    echo  URL:    httpS://%HOST%
+    echo  URL:    https://%HOST%
 ) else (
     IF "%PORT%" == 80 (
     echo  URL:    http://%HOST%
@@ -23,22 +23,22 @@ if "%USE_SSL%" == "Y" (
 echo =================================================
 echo  Press Ctrl+C to stop.
 echo.
-echo status %USE_SSL% cgi %PHP_CGI%
 
+
+  
+if /i "%USE_SSL%"=="Y" (
 REM ---- Normalize paths ----
 set "NG_EXE=%NGINX_EXE:\=/%"
 set "NG_CONF=%NGINX_CONF:\=/%"
 set "NG_DIR=%NGINX_DIR:\=/%"
-    echo [INFO] Starting PHP FastCGI on %BIND_IP%:%PORT%  
-if /i "%USE_SSL%"=="Y" (
 
 
-
+  echo [INFO] Starting PHP FastCGI on %BIND_IP%:%PORT%  
     REM ---- Kill any existing nginx ----
     taskkill /IM nginx.exe /F >nul 2>&1
 
     REM ---- Start php-cgi ----
-       start "PHP-CGI" cmd /k "%PHP_DIR%php-cgi.exe -b %BIND_IP%:%PORT%"
+       start "PHP-CGI" cmd /k "%PHP_CGI% -b %BIND_IP%:%PORT%"
 
     REM ---- Wait until php-cgi is listening ----
     echo %BIND_IP%:%PORT%
@@ -69,8 +69,8 @@ if /i "%USE_SSL%"=="Y" (
     echo [INFO] SSL disabled
     echo [INFO] Starting PHP built-in server
     echo        Bind: %BIND_IP%:%PORT%
-
-    "%PHP_EXE%" -S %BIND_IP%:%PORT% -t "%PROJECT_DIR%"
+   echo %PHP_EXE% -S %BIND_IP%:%PORT% -t %PROJECT_DIR%
+    "%PHP_EXE%" -S "%BIND_IP%:%PORT%" -t "%PROJECT_DIR%"
     pause
 )
 

@@ -23,7 +23,8 @@ if not defined INST_DIR (
 )
 
 set "PROJECT_DIR=%SERVER_ROOT%%PROJECT_NAME%"
-set "NGINX_CONF_FILE=%INST_DIR%\nginx.conf"
+REM set "NGINX_CONF_FILE=%INST_DIR%\nginx.conf"
+set "NGINX_CONF_FILE=%NGINX_CONF%"
 set "NGINX_DIR=%INST_DIR%"
 
 REM ==============================
@@ -75,16 +76,25 @@ if /i "%USE_SSL%"=="Y" (
 REM ==============================
 REM Step 3: Create log folder + files
 REM ==============================
-if not exist "%NGINX_DIR%\logs" mkdir "%NGINX_DIR%\logs"
-if not exist "%NGINX_DIR%\temp" mkdir "%NGINX_DIR%\temp"
-if not exist "%NGINX_DIR%\logs\error.log" (
-    type nul > "%NGINX_DIR%\logs\error.log"
+if not exist "%BASE%logs" mkdir "%BASE%\logs"
+if not exist "%BASE%temp" mkdir "%BASE%\temp"
+if not exist "%BASE%logs\error.log" (
+    type nul > "%BASE%logs\error.log"
 )
 
-if not exist "%NGINX_DIR%\logs\access.log" (
-    type nul > "%NGINX_DIR%\logs\access.log"
+if not exist "%BASE%\logs\access.log" (
+    type nul > "%BASE%\logs\access.log"
 )
 
+rem if not exist "%NGINX_DIR%\logs" mkdir "%NGINX_DIR%\logs"
+rem if not exist "%NGINX_DIR%\temp" mkdir "%NGINX_DIR%\temp"
+rem if not exist "%NGINX_DIR%\logs\error.log" (
+rem     type nul > "%NGINX_DIR%\logs\error.log"
+rem )
+
+rem if not exist "%NGINX_DIR%\logs\access.log" (
+rem     type nul > "%NGINX_DIR%\logs\access.log"
+rem )
 REM ==============================
 REM Step 4: Prepare variables for nginx.conf
 REM ==============================
@@ -110,17 +120,15 @@ echo [INFO] Rewriting nginx.conf content...
     echo     sendfile        on;
     echo     keepalive_timeout  65;
     echo.
-    echo     error_log  "%NGINX_DIR%\logs\error.log";
-    echo     access_log "%NGINX_DIR%\logs\access.log" main;
+    echo     error_log  "%BASE%\logs\error.log";
+    echo     access_log "%BASE%\logs\access.log" ;
     echo.
     echo     server {
-    if /i "%USE_SSL%"=="Y" (
+   
         echo         listen       443 ssl;
         echo         ssl_certificate      "!NGINX_CRT!";
         echo         ssl_certificate_key  "!NGINX_KEY!";
-    ) else (
-        echo         listen       80;
-    )
+   
     echo         server_name  %HOST%;
     echo         root   !P_DIR!;
     echo         index  index.php index.html;
@@ -130,7 +138,11 @@ echo [INFO] Rewriting nginx.conf content...
     echo         }
     echo.
     echo         location ~ \.php$ {
-    echo             fastcgi_pass %BIND_IP%:%PORT%;
+if %PORT%==80 (
+    echo             fastcgi_pass %HOST%:443;
+) else (
+    echo             fastcgi_pass %HOST%:%PORT%;
+)
     echo             fastcgi_index index.php;
     echo             fastcgi_param SCRIPT_FILENAME "!P_DIR!/index.php";
     echo             include fastcgi_params;
@@ -140,7 +152,8 @@ echo [INFO] Rewriting nginx.conf content...
 ) > "%NGINX_CONF_FILE%"
 
 echo [INFO] nginx.conf content overwritten: %NGINX_CONF_FILE%
-endlocal & set "USE_SSL=%USE_SSL%"
-)
+
 echo [INFO] Nginx setup completed.
+)
+endlocal & set "USE_SSL=%USE_SSL%"
 exit /b 0
